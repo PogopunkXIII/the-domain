@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, abort, make_response
-
+import network
 domain = Flask(__name__)
 
 tasks = [
@@ -17,9 +17,13 @@ tasks = [
     }
 ]
 
+@domain.route('/network/wol/<string:computer_name>', methods=['POST'])
+def wakeComp(computer_name):
+    return(network.wake_on_lan(computer_name))
+
 @domain.route('/todo/api/v1.0/tasks', methods=['GET'])
 def get_tasks():
-	return jsonify({'tasks': tasks})
+    return jsonify({'tasks': tasks})
 
 @domain.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
 def get_task(task_id):
