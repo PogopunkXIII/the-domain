@@ -2,21 +2,6 @@ from flask import Flask, jsonify, abort, make_response
 import network
 domain = Flask(__name__)
 
-tasks = [
-    {
-        'id': 1,
-        'title': u'Buy groceries',
-        'description': u'Milk, Cheese, Pizza, Fruit, Tylenol', 
-        'done': False
-    },
-    {
-        'id': 2,
-        'title': u'Learn Python',
-        'description': u'Need to find a good Python tutorial on the web', 
-        'done': False
-    }
-]
-
 @domain.route('/network/wol/<string:computer_name>', methods=['POST'])
 def wakeComp(computer_name):
     return(network.wake_on_lan(computer_name))
