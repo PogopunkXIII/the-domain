@@ -1,10 +1,13 @@
-from flask import Flask, jsonify, abort, make_response
+from flask import Flask, jsonify, abort, make_response, request
 import network
 domain = Flask(__name__)
 
-@domain.route('/network/wol/<string:computer_name>', methods=['POST'])
-def wakeComp(computer_name):
-    return(network.wake_on_lan(computer_name))
+@domain.route('/network/wol', methods=['POST'])
+def wakeComp():
+    if not request.json or not 'computer_name' in request.json:
+        abort(400)
+    network.wake_on_lan(request.json['computer_name'])
+    return "", 200
 
 @domain.route('/todo/api/v1.0/tasks', methods=['GET'])
 def get_tasks():

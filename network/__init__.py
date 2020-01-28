@@ -1,1 +1,1 @@
-import network_commands as network
+from .network_commands import wake_on_lan 
