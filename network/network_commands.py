@@ -1,3 +1,5 @@
-#Here's where I'd put some commands, if I had any
+import subprocess
+
 def wake_on_lan(computer_name):
-    return("this would wake the computer {}", computer_name)
+    #need to get the mac address of my computer, stored in a dictionary?
+    wol = subprocess.run(["./commands/wol.sh", mac_address_to_wake])
